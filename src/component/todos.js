@@ -39,7 +39,7 @@ const Todos = ({ todos, deleteTodo }) => {
       );
     })
   ) : (
-    <p>Your todo list is empty. Time to relax!</p>
+    <p>You have no todo's left</p>
   );
 
   return (
