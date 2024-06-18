@@ -7,6 +7,9 @@ class AddTodo extends Component {
     super();
     this.state = {
       content: "",
+      date: "",
+      preConditions: "",
+      acceptanceCriteria: "",
     };
   }
   // The handleChange function updates the react state with the new input value provided from the user.
@@ -15,6 +18,7 @@ class AddTodo extends Component {
   handleChange = (event) => {
     this.setState({
       content: event.target.value,
+      date: new Date().toLocaleString("en-US"),
     });
   };
   // The handleSubmit function collects the forms input and puts it into the react state.
@@ -27,6 +31,9 @@ class AddTodo extends Component {
       this.props.addTodo(this.state);
       this.setState({
         content: "",
+        date: "",
+        preConditions: "",
+        acceptanceCriteria: "",
       });
     }
   };
@@ -41,14 +48,47 @@ class AddTodo extends Component {
       // 4. The value of the text field also should reflect the local state of this component.
       <div>
         <TextField
-          label="Add New Item"
+          label="New Item"
           variant="outlined"
           onChange={this.handleChange}
           value={this.state.content}
           data-testid="new-item-textfield"
+          sx={{
+            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 2,
+            },
+          }}
+        />
+        <TextField
+          label="Pre-conditions"
+          variant="outlined"
+          onChange={(e) => this.setState({ preConditions: e.target.value })}
+          value={this.state.preConditions}
+          sx={{
+            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 2,
+            },
+          }}
+        />
+        <TextField
+          label="Acceptance Criteria"
+          variant="outlined"
+          onChange={(e) =>
+            this.setState({ acceptanceCriteria: e.target.value })
+          }
+          value={this.state.acceptanceCriteria}
+          sx={{
+            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 2,
+            },
+          }}
         />
         <Button
-          style={{ marginLeft: "10px" }}
+          style={{
+            marginLeft: "10px",
+            backgroundColor: "orange",
+            height: "56px",
+          }}
           onClick={this.handleSubmit}
           variant="contained"
           color="primary"
